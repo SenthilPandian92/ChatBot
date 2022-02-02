@@ -10,11 +10,23 @@ const OrderState = Object.freeze({
     DRINKS:  Symbol("drinks")
 });
 
-displayAmount(){
-    let price = 0;
+/**displayAmount()
+{
+    var price = 0;
+    if (this.sDesserts){
+        price = price + 10;
+    }
+    if (this.sNachos){
+        price = price + 5;
+    }
+    if (this.sTachos){
+        price = price + 6;
+    }
+    price = price * 4;
 
-
-}
+    return price;
+    
+}*/
 
 module.exports = class poutineOrder extends Order{
     constructor(){
@@ -44,12 +56,12 @@ module.exports = class poutineOrder extends Order{
             case OrderState.TOPPINGS:
                 this.stateCur = OrderState.NACHOS
                 this.sToppings= sInput;
-                aReturn.push(" would you like to have Nachos?");
+                aReturn.push(" How many Nachos would you like to have?");
                 break;
             case OrderState.NACHOS:
                 this.stateCur = OrderState.TACHOS
                 this.sNachos = sInput;
-                aReturn.push("would you like to have Tachos?");
+                aReturn.push(" How many Tachos would you like to have?");
                 break;
             case OrderState.TACHOS:
                 this.stateCur = OrderState.DESSERTS
@@ -59,18 +71,19 @@ module.exports = class poutineOrder extends Order{
             case OrderState.DESSERTS:
                 this.stateCur = OrderState.DRINKS
                 this.sDesserts = sInput;
-                aReturn.push("Would you like drinks with that?");
+                aReturn.push("What drinks would you like with that?");
                 break;
             case OrderState.DRINKS:
                 this.isDone(true);
                 if(sInput.toLowerCase() != "no"){
                     this.sDrinks = sInput;
                 }
+             // aReturn.push(`Total price is $ ${this.displayAmount().tofixed(2)} including taxes`);
                 aReturn.push("Thank-you for your order of");
                 aReturn.push(`${this.sSize} ${this.sItem} with ${this.sToppings}`);
-                aReturn.push(`along with ${this.sNachos}Nachos and ${this.sTachos}Tachos`);
+                aReturn.push(`along with ${this.sNachos} Nachos and ${this.sTachos} Tachos`);
                 if(`with${this.sDrinks}`){
-                    aReturn.push(this.sDrinks);
+                    aReturn.push(`and ${this.sDrinks}`);
                 }
                 let d = new Date(); 
                 d.setMinutes(d.getMinutes() + 20);
