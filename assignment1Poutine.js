@@ -27,7 +27,7 @@ module.exports = class poutineOrder extends Order{
         switch(this.stateCur){
             case OrderState.WELCOMING:
                 this.stateCur = OrderState.SIZE;
-                aReturn.push("Welcome to senthil's Poutine.");
+                aReturn.push("Welcome to Senthil's Poutine.");
                 aReturn.push("What size would you like?");
                 break;
             case OrderState.SIZE:
