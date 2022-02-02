@@ -4,24 +4,30 @@ const OrderState = Object.freeze({
     WELCOMING:   Symbol("welcoming"),
     SIZE:   Symbol("size"),
     TOPPINGS:   Symbol("toppings"),
+    DESSERTS:   Symbol("Desserts"),
+    NACHOS:   Symbol("Nachos"),
+    TACHOS:   Symbol("Tachos"),
     DRINKS:  Symbol("drinks")
 });
 
-module.exports = class ShwarmaOrder extends Order{
+module.exports = class poutineOrder extends Order{
     constructor(){
         super();
         this.stateCur = OrderState.WELCOMING;
         this.sSize = "";
         this.sToppings = "";
+        this.sDesserts = "";
+        this.sNachos = "";
+        this.sTachos = "";
         this.sDrinks = "";
-        this.sItem = "shawarama";
+        this.sItem = "Poutine";
     }
     handleInput(sInput){
         let aReturn = [];
         switch(this.stateCur){
             case OrderState.WELCOMING:
                 this.stateCur = OrderState.SIZE;
-                aReturn.push("Welcome to Richard's Shawarma.");
+                aReturn.push("Welcome to senthil's Poutine.");
                 aReturn.push("What size would you like?");
                 break;
             case OrderState.SIZE:
@@ -30,8 +36,22 @@ module.exports = class ShwarmaOrder extends Order{
                 aReturn.push("What toppings would you like?");
                 break;
             case OrderState.TOPPINGS:
+                this.stateCur = OrderState.NACHOS
+                this.sToppings= sInput;
+                aReturn.push(" would you like to have Nachos?");
+                break;
+            case OrderState.NACHOS:
+                this.stateCur = OrderState.TaCHOS
+                this.sNachos = sInput;
+                aReturn.push("would you like to have Tachos?");
+                break;
+            case OrderState.TACHOS:
+                this.sTachos = sInput;
+                aReturn.push("What dessert would you like - Ice cream or pastry?");
+                break;
+            case OrderState.DESSERTS:
                 this.stateCur = OrderState.DRINKS
-                this.sToppings = sInput;
+                this.sDesserts = sInput;
                 aReturn.push("Would you like drinks with that?");
                 break;
             case OrderState.DRINKS:
@@ -41,6 +61,7 @@ module.exports = class ShwarmaOrder extends Order{
                 }
                 aReturn.push("Thank-you for your order of");
                 aReturn.push(`${this.sSize} ${this.sItem} with ${this.sToppings}`);
+                aReturn.push(`along with ${this.sNachos} and ${this.sTachos}`);
                 if(this.sDrinks){
                     aReturn.push(this.sDrinks);
                 }
