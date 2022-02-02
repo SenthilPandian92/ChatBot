@@ -10,6 +10,12 @@ const OrderState = Object.freeze({
     DRINKS:  Symbol("drinks")
 });
 
+displayAmount(){
+    let price = 0;
+
+
+}
+
 module.exports = class poutineOrder extends Order{
     constructor(){
         super();
@@ -41,11 +47,12 @@ module.exports = class poutineOrder extends Order{
                 aReturn.push(" would you like to have Nachos?");
                 break;
             case OrderState.NACHOS:
-                this.stateCur = OrderState.TaCHOS
+                this.stateCur = OrderState.TACHOS
                 this.sNachos = sInput;
                 aReturn.push("would you like to have Tachos?");
                 break;
             case OrderState.TACHOS:
+                this.stateCur = OrderState.DESSERTS
                 this.sTachos = sInput;
                 aReturn.push("What dessert would you like - Ice cream or pastry?");
                 break;
@@ -61,8 +68,8 @@ module.exports = class poutineOrder extends Order{
                 }
                 aReturn.push("Thank-you for your order of");
                 aReturn.push(`${this.sSize} ${this.sItem} with ${this.sToppings}`);
-                aReturn.push(`along with ${this.sNachos} and ${this.sTachos}`);
-                if(this.sDrinks){
+                aReturn.push(`along with ${this.sNachos}Nachos and ${this.sTachos}Tachos`);
+                if(`with${this.sDrinks}`){
                     aReturn.push(this.sDrinks);
                 }
                 let d = new Date(); 
