@@ -10,24 +10,6 @@ const OrderState = Object.freeze({
     DRINKS:  Symbol("drinks")
 });
 
-/**displayAmount()
-{
-    var price = 0;
-    if (this.sDesserts){
-        price = price + 10;
-    }
-    if (this.sNachos){
-        price = price + 5;
-    }
-    if (this.sTachos){
-        price = price + 6;
-    }
-    price = price * 4;
-
-    return price;
-    
-}*/
-
 module.exports = class poutineOrder extends Order{
     constructor(){
         super();
@@ -78,7 +60,7 @@ module.exports = class poutineOrder extends Order{
                 if(sInput.toLowerCase() != "no"){
                     this.sDrinks = sInput;
                 }
-             // aReturn.push(`Total price is $ ${this.displayAmount().tofixed(2)} including taxes`);
+                
                 aReturn.push("Thank-you for your order of");
                 aReturn.push(`${this.sSize} ${this.sItem} with ${this.sToppings}`);
                 aReturn.push(`along with ${this.sNachos} Nachos and ${this.sTachos} Tachos`);
